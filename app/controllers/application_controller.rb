@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   def digest(token)
     Digest::SHA1.hexdigest(token)
   end
@@ -11,10 +10,11 @@ class ApplicationController < ActionController::Base
     cookies.permanent[:remember_token] = remember_token
     current_user
   end
-
   def current_user
-    remember_token = cookies.permanent[:remember_token]
-    @current_user ||= User.find_by(remember_digest: digest(remember_token))
+    if cookies.permanent[:remember_token]
+      remember_token = cookies.permanent[:remember_token]
+      @current_user ||= User.find_by(remember_digest: digest(remember_token))
+    end
   end
 
   def current_user=(user)
@@ -23,7 +23,11 @@ class ApplicationController < ActionController::Base
 
   def sign_out(user)
     user.update_attribute(:remember_digest, nil)
-    cookies.delete[:remember_token] = nil
+    cookies.delete :remember_token
   end
-  
+
+  def logged_in?(user)
+    !!@current_user
+  end
+
 end

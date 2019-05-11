@@ -1,0 +1,8 @@
+<% provide(:title, "Home") %>
+<h1>Welcome to the Members Only App</h1>
+<% if !!cookies[:remember_token] %>
+<p>Welcome <%= @user.name %></p>
+<%= link_to 'Sign Out', logout_path, method: :delete %>
+<% else %>
+<%= link_to 'Log In',login_path  %>
+<% end %>
