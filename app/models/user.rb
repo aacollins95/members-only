@@ -9,5 +9,5 @@ class User < ApplicationRecord
     self.remember_digest = Digest::SHA1.hexdigest(remember_token)
   end
 
-
+  
 end
