@@ -1,0 +1,10 @@
+<li>
+  <%= post.title %>
+  <br>
+  <%= post.content %>
+  <% if cookies[:remember_token] %>
+    <br>
+    <p>Posted by: <%= post.user.name %></p>
+  <% end %>
+</li>
+<br>

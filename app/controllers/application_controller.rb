@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     cookies.permanent[:remember_token] = remember_token
     current_user
   end
+
   def current_user
     if cookies.permanent[:remember_token]
       remember_token = cookies.permanent[:remember_token]
@@ -27,6 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?(user)
+    
     !!@current_user
   end
 
